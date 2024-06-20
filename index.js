@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(cors());
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', 'https://pool-pal.vercel.app/');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -34,7 +34,7 @@ const server = app.listen(port, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 15000,
   cors: {
-    origin: "http://localhost:3000"
+    origin: "https://pool-pal.vercel.app/"
   },
 });
 
