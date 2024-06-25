@@ -28,8 +28,8 @@ const getGhid = async (location) => {
 
 router.post('/getpoolmsg', async (req, res) => {
     try {
-        let from_ghid = getGhid(req.body.fromloc);
-        let to_ghid = getGhid(req.body.toloc);
+        let from_ghid = await getGhid(req.body.fromloc);
+        let to_ghid = await getGhid(req.body.toloc);
 
         let from_neighbours = Geohash.neighbours(from_ghid);
         let to_neighbours = Geohash.neighbours(to_ghid);
@@ -133,8 +133,8 @@ router.post('/createpmsg', async (req, res) => {
             return res.status(400).json({ errors: 'Try logging with correct credentials' });
         }
 
-        let from_ghid = getGhid(req.body.fromloc);
-        let to_ghid = getGhid(req.body.toloc);
+        let from_ghid = await getGhid(req.body.fromloc);
+        let to_ghid = await getGhid(req.body.toloc);
 
         let FromBucket = await GHBucket.findOne({ Prefix: from_ghid });
         let ToBucket = await GHBucket.findOne({ Prefix: to_ghid });
