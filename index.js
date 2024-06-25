@@ -13,9 +13,9 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.json())
-app.use('/api', require('./routes/CrtUser'));
-app.use('/api', require('./routes/CrtPMsg'));
-app.use('/api', require('./routes/DisplayData'));
+app.use('/api', require('./routes/HandleUser'));
+app.use('/api', require('./routes/HandlePMsg'));
+app.use('/api', require('./routes/HandleStatus'));
 app.use('/api', require('./routes/HandleChats'));
 
 const server = app.listen(port, () => {

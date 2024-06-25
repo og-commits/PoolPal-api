@@ -41,6 +41,12 @@ const PMsgSchema = new Schema({
     },
     chatids:{
         type: Array
+    },
+    FromGhid:{
+        type: String
+    },
+    ToGhid:{
+        type: String
     }
 });
 
