@@ -36,6 +36,9 @@ router.post('/getpoolmsg', async (req, res) => {
         let from_neighbours = Geohash.neighbours(from_ghid);
         let to_neighbours = Geohash.neighbours(to_ghid);
 
+        from_neighbours.push(from_ghid);
+        to_neighbours.push(to_ghid);
+
         if(!from_neighbours || !to_neighbours) 
             return res.status(400).json({ errors: 'No pools in this location.' });
 
@@ -51,7 +54,11 @@ router.post('/getpoolmsg', async (req, res) => {
 
                 if (!pmsg) continue;
 
-                if (to_neighbours.includes(pmsg.ToGhid)) {
+                let toBucket = await GHBucket.findById(pmsg.ToGhid);
+
+                if (!toBucket) continue;
+
+                if (to_neighbours.includes(toBucket.Prefix)) {
                     allpmsg.push(pmsg);
                 }
             }
