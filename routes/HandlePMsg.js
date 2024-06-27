@@ -178,8 +178,7 @@ router.post('/createpmsg', async (req, res) => {
         res.json({ success: true });
     }
     catch (error) {
-        console.log(error);
-        res.json({ success: false });
+        res.json({ success: false, error: error });
     }
 })
 
