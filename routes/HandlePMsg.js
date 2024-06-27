@@ -14,14 +14,16 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const dmaiKey = process.env.DMAI_API_KEY;
 
+const fetch = require('node-fetch');
+
 const getGhid = async (location) => {
     let url = "https://api.distancematrix.ai/maps/api/geocode/json?address=" + location + "&key=" + dmaiKey;
-    let reponse = await fetch(url);
-    let data = await reponse.json();
+    let response = await fetch(url);
+    let data = await response.json();
 
     return Geohash.encode(
-        data.results[0].geometry.location.lat, 
-        data.results[0].geometry.location.lng, 
+        data.result[0].geometry.location.lat, 
+        data.result[0].geometry.location.lng, 
         5
     );
 }
@@ -178,8 +180,7 @@ router.post('/createpmsg', async (req, res) => {
         res.json({ success: true });
     }
     catch (error) {
-        console.log(error);
-        res.json({ success: false });
+        res.json({ success: false, error: error });
     }
 })
 
